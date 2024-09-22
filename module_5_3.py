@@ -33,8 +33,52 @@ class House:
             return False
 
     def __add__(self, value):
-        if self.number_of_floors
+        if not value.is_integer():
+            return False
+        else:
+            return House(self.name, self.number_of_floors + value)
 
+    def __iadd__(self, value):
+        if not value.is_integer():
+            return False
+        else:
+            return House(self.name, self.number_of_floors + value)
+
+    def __radd__(self, value):
+        if not value.is_integer():
+            return False
+        else:
+            return House(self.name, self.number_of_floors + value)
+
+    def __qt__(self, other):
+        if self.number_of_floors > other.number_of_floors:
+            return True
+        else:
+            return False
+
+    def __qe__(self, other):
+        if self.number_of_floors >= other.number_of_floors:
+            return True
+        else:
+            return False
+
+    def __lt__(self, other):
+        if self.number_of_floors < other.number_of_floors:
+            return True
+        else:
+            return False
+
+    def __le__(self, other):
+        if self.number_of_floors <= other.number_of_floors:
+            return True
+        else:
+            return False
+
+    def __ne__(self, other):
+        if self.number_of_floors != other.number_of_floors:
+            return True
+        else:
+            return False
 
 h1 = House('ЖК Эльбрус', 10)
 h2 = House('ЖК Акация', 20)
