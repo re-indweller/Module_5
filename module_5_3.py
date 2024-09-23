@@ -27,58 +27,42 @@ class House:
 # Модуль 5.3
 
     def __eq__(self, other):
-        if self.number_of_floors == other.number_of_floors:
-            return True
-        else:
-            return False
+        if isinstance(other, House):
+            if self.number_of_floors == other.number_of_floors:
+                return True
+            else:
+                return False
 
     def __add__(self, value):
-        if not value.is_integer():
-            return False
-        else:
-            return House(self.name, self.number_of_floors + value)
+        if isinstance(value, int):
+            if not value.is_integer():
+                return False
+            else:
+                return House(self.name, self.number_of_floors + value)
 
-    def __iadd__(self, value):
-        if not value.is_integer():
-            return False
-        else:
-            return House(self.name, self.number_of_floors + value)
+    def __iadd__(self, other):
+        return self.__add__(other)
 
-    def __radd__(self, value):
-        if not value.is_integer():
-            return False
-        else:
-            return House(self.name, self.number_of_floors + value)
+    def __radd__(self, other):
+        return self.__add__(other)
 
-    def __qt__(self, other):
-        if self.number_of_floors > other.number_of_floors:
-            return True
-        else:
-            return False
+    def __gt__(self, other):
+        return not self.__le__(other)
 
     def __qe__(self, other):
-        if self.number_of_floors >= other.number_of_floors:
-            return True
-        else:
-            return False
+        return not self.__lt__(other)
 
     def __lt__(self, other):
-        if self.number_of_floors < other.number_of_floors:
-            return True
-        else:
-            return False
+        if isinstance(other, House):
+            return self.number_of_floors < other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors < other
 
     def __le__(self, other):
-        if self.number_of_floors <= other.number_of_floors:
-            return True
-        else:
-            return False
+        return self.__eq__(other) or self.__lt__(other)
 
     def __ne__(self, other):
-        if self.number_of_floors != other.number_of_floors:
-            return True
-        else:
-            return False
+        return not self.__eq__(other)
 
 h1 = House('ЖК Эльбрус', 10)
 h2 = House('ЖК Акация', 20)
